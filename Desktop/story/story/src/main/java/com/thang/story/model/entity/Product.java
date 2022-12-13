@@ -1,6 +1,5 @@
 package com.thang.story.model.entity;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,15 +10,23 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table(name = "roles")
-public class Role {
+@Table(name = "products")
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
-    public Role(String name) {
-        this.name = name;
-    }
+    private double price;
+
+    private String description;
+
+    private int quantity;
+
+    private String image;
+
+    private Long brandId;
+
+    private Long categoryId;
 }

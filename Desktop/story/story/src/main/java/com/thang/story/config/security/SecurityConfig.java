@@ -38,11 +38,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private IRoleService roleService;
 
-    @Autowired
-    private IUserRepository userRepository;
-
-    @Autowired
-    private IRoleRepository roleRepository;
 
 
 
