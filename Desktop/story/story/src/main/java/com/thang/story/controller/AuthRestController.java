@@ -53,7 +53,7 @@ public class AuthRestController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtProvider.generateTokenLogin(authentication);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        return ResponseEntity.ok(new JwtResponse(jwt, currentUser.get().getId(), currentUser.get().getEmail(), userDetails.getAuthorities()));
+        return ResponseEntity.ok(new JwtResponse(jwt, currentUser.get().getId(), currentUser.get().getEmail(),currentUser.get().getUsername(), userDetails.getAuthorities()));
     }
 
     @PostMapping("/register")

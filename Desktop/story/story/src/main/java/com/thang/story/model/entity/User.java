@@ -29,8 +29,6 @@ public class User {
 
     private Date dateCreated;
 
-    private String studioName;
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role")
     private List<Role> roles;
