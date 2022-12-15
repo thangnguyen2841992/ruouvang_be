@@ -33,7 +33,7 @@ public class CategoryRestController {
         return new ResponseEntity<>(categoryDTOS, HttpStatus.OK);
     }
     @GetMapping("/{id}")
-    public ResponseEntity<?> finfCategoryById(@PathVariable Long id) {
+    public ResponseEntity<?> findCategoryById(@PathVariable Long id) {
         Optional<Category> categoryOptional = this.categoryService.findById(id);
         if (!categoryOptional.isPresent()) {
             return new ResponseEntity<>(new Message("Category không tồn tại!"), HttpStatus.BAD_REQUEST);

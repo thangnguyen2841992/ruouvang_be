@@ -71,15 +71,15 @@ public class AuthRestController {
             return new ResponseEntity<>(new Message("Số điện thoại đã tồn tại!"), HttpStatus.BAD_REQUEST);
         }
         User newUser = new User();
-        int index = 0;
-        String s = registerForm.getEmail();
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) == '@'){
-                index = i;
-                break;
-            }
-        }
-        String username = s.substring(0, index);
+//        int index = 0;
+//        String s = registerForm.getEmail();
+//        for (int i = 0; i < s.length(); i++) {
+//            if (s.charAt(i) == '@'){
+//                index = i;
+//                break;
+//            }
+//        }
+        String username = registerForm.getUsername();
         newUser.setUsername(username);
         newUser.setPassword(registerForm.getPassword());
         newUser.setPhone(registerForm.getPhone());
