@@ -11,12 +11,11 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "brands")
-public class Brand {
+public class Accessory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
-    private Long categoryId;
 }

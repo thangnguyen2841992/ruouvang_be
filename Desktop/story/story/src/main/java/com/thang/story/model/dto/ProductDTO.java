@@ -26,7 +26,9 @@ public class ProductDTO {
 
     private String image;
 
-    private String brand;
+    private String accessory;
 
-    private String category;
+    private String origin;
+
+    private String type;
 }

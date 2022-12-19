@@ -1,12 +1,12 @@
 package com.thang.story.service.product;
 
 import com.thang.story.model.dto.ProductDTO;
-import com.thang.story.model.entity.Brand;
-import com.thang.story.model.entity.Category;
+import com.thang.story.model.entity.Accessory;
+import com.thang.story.model.entity.Origin;
 import com.thang.story.model.entity.Product;
 import com.thang.story.repository.IProductRepository;
-import com.thang.story.service.brand.IBrandService;
-import com.thang.story.service.category.ICategoryService;
+import com.thang.story.service.accessory.IAccessoryService;
+import com.thang.story.service.origin.IOriginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +18,9 @@ public class ProductServiceImpl implements IProductService{
     @Autowired
     private IProductRepository productRepository;
     @Autowired
-    private IBrandService brandService;
+    private IAccessoryService brandService;
     @Autowired
-    private ICategoryService categoryService;
+    private IOriginService categoryService;
     @Override
     public List<Product> findAll() {
         return this.productRepository.findAll();
@@ -55,10 +55,10 @@ public class ProductServiceImpl implements IProductService{
         productDTO.setDescription(product.getDescription());
         productDTO.setPrice(product.getPrice());
         productDTO.setQuantity(product.getQuantity());
-        Category category = this.categoryService.findById(product.getCategoryId()).get();
-        productDTO.setCategory(category.getName());
-        Brand brand = this.brandService.findById(product.getBrandId()).get();
-        productDTO.setBrand(brand.getName());
+        Origin origin = this.categoryService.findById(product.getOriginId()).get();
+        productDTO.setOrigin(origin.getName());
+        Accessory accessory = this.brandService.findById(product.getAccessoryId()).get();
+        productDTO.setAccessory(accessory.getName());
         return productDTO;
     }
 

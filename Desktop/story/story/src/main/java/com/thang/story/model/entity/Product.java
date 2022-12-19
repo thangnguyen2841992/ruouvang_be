@@ -26,7 +26,9 @@ public class Product {
 
     private String image;
 
-    private Long brandId;
+    private Long originId;
 
-    private Long categoryId;
+    private Long accessoryId;
+
+    private Long typeId;
 }
