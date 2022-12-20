@@ -4,9 +4,11 @@ import com.thang.story.model.dto.ProductDTO;
 import com.thang.story.model.entity.Accessory;
 import com.thang.story.model.entity.Origin;
 import com.thang.story.model.entity.Product;
+import com.thang.story.model.entity.Type;
 import com.thang.story.repository.IProductRepository;
 import com.thang.story.service.accessory.IAccessoryService;
 import com.thang.story.service.origin.IOriginService;
+import com.thang.story.service.type.ITypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,9 +20,11 @@ public class ProductServiceImpl implements IProductService{
     @Autowired
     private IProductRepository productRepository;
     @Autowired
-    private IAccessoryService brandService;
+    private IAccessoryService accessoryService;
     @Autowired
-    private IOriginService categoryService;
+    private IOriginService originService;
+    @Autowired
+    private ITypeService typeService;
     @Override
     public List<Product> findAll() {
         return this.productRepository.findAll();
@@ -41,9 +45,15 @@ public class ProductServiceImpl implements IProductService{
         this.productRepository.deleteById(id);
     }
 
+
     @Override
-    public List<Product> findAllProducts(int offset) {
-        return this.productRepository.findAllProducts(offset);
+    public List<Product> findAllAlcohol(int offset) {
+        return this.productRepository.findAllAlcohol(offset);
+    }
+
+    @Override
+    public List<Product> findAllAccessory(int offset) {
+        return this.productRepository.findAllAccessory(offset);
     }
 
     @Override
@@ -55,20 +65,25 @@ public class ProductServiceImpl implements IProductService{
         productDTO.setDescription(product.getDescription());
         productDTO.setPrice(product.getPrice());
         productDTO.setQuantity(product.getQuantity());
-        Origin origin = this.categoryService.findById(product.getOriginId()).get();
-        productDTO.setOrigin(origin.getName());
-        Accessory accessory = this.brandService.findById(product.getAccessoryId()).get();
-        productDTO.setAccessory(accessory.getName());
+        Optional<Origin> origin = this.originService.findById(product.getOriginId());
+        if (origin.isPresent()) {
+            productDTO.setOrigin(origin.get().getName());
+        }else {
+            productDTO.setOrigin("");
+        }
+        Optional<Accessory> accessory = this.accessoryService.findById(product.getAccessoryId());
+        if (accessory.isPresent()) {
+            productDTO.setAccessory(accessory.get().getName());
+        }else {
+            productDTO.setAccessory("");
+        }
+        Optional<Type> type = this.typeService.findById(product.getTypeId());
+        if (type.isPresent()) {
+            productDTO.setType(type.get().getName());
+        }else {
+            productDTO.setType("");
+        }
         return productDTO;
     }
 
-    @Override
-    public List<Product> findAllProductByCategory3(int offset) {
-        return this.productRepository.findAllProductByCategory3(offset);
-    }
-
-    @Override
-    public List<Product> findAllProductByCategory1and2(int offset) {
-        return this.productRepository.findAllProductByCategory1and2(offset);
-    }
 }

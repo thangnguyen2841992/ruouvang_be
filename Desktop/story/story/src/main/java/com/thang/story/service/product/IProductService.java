@@ -7,14 +7,14 @@ import com.thang.story.service.IGeneralService;
 import java.util.List;
 
 public interface IProductService extends IGeneralService<Product> {
-    List<Product> findAllProducts(int offset);
+    List<Product> findAllAlcohol(int offset);
+    List<Product> findAllAccessory(int offset);
+
+
 
     ProductDTO mappingProductToProductDTO(Product product);
 
 
-    List<Product> findAllProductByCategory3(int offset);
-
-    List<Product> findAllProductByCategory1and2(int offset);
 
 
 }

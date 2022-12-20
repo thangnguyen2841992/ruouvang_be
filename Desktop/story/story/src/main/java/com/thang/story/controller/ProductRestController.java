@@ -37,19 +37,9 @@ public class ProductRestController {
         return new ResponseEntity<>(productOptional.get(), HttpStatus.OK);
     }
 
-    @GetMapping
-    public ResponseEntity<?> getAllProducts(@RequestParam(value = "offset") int offset) {
-        List<Product> products = this.productService.findAllProducts(offset);
-        List<ProductDTO> productDTOList = new ArrayList<>();
-        for (int i = 0; i < products.size(); i++) {
-            productDTOList.add(this.productService.mappingProductToProductDTO(products.get(i)));
-        }
-        return new ResponseEntity<>(productDTOList, HttpStatus.OK);
-    }
-
     @GetMapping("/accessory")
     public ResponseEntity<?> getAllProductCategory3(@RequestParam(value = "offset") int offset) {
-        List<Product> products = this.productService.findAllProductByCategory3(offset);
+        List<Product> products = this.productService.findAllAccessory(offset);
         List<ProductDTO> productDTOList = new ArrayList<>();
         for (int i = 0; i < products.size(); i++) {
             productDTOList.add(this.productService.mappingProductToProductDTO(products.get(i)));
@@ -58,8 +48,8 @@ public class ProductRestController {
     }
 
     @GetMapping("/alcohol")
-    public ResponseEntity<?> getAllProductCategory1and2(@RequestParam(value = "offset") int offset) {
-        List<Product> products = this.productService.findAllProductByCategory1and2(offset);
+    public ResponseEntity<?> getAllAlcohol(@RequestParam(value = "offset") int offset) {
+        List<Product> products = this.productService.findAllAlcohol(offset);
         List<ProductDTO> productDTOList = new ArrayList<>();
         for (int i = 0; i < products.size(); i++) {
             productDTOList.add(this.productService.mappingProductToProductDTO(products.get(i)));
@@ -69,14 +59,6 @@ public class ProductRestController {
 
     @PostMapping
     public ResponseEntity<?> createNewProduct(@RequestBody Product product) {
-        Optional<Origin> categoryOptional = this.categoryService.findById(product.getOriginId());
-        if (!categoryOptional.isPresent()) {
-            return new ResponseEntity<>(new Message("Origin không đúng"), HttpStatus.BAD_REQUEST);
-        }
-        Optional<Accessory> brandOptional = this.brandService.findById(product.getAccessoryId());
-        if (!brandOptional.isPresent()) {
-            return new ResponseEntity<>(new Message("Accessory Không đúng"), HttpStatus.BAD_REQUEST);
-        }
         this.productService.save(product);
         return new ResponseEntity<>(product, HttpStatus.CREATED);
     }
@@ -94,6 +76,7 @@ public class ProductRestController {
         product.setDescription(productForm.getDescription());
         product.setOriginId(productForm.getOriginId());
         product.setAccessoryId(productForm.getAccessoryId());
+        product.setTypeId(productForm.getTypeId());
         product.setImage(productForm.getImage());
         this.productService.save(product);
         return new ResponseEntity<>(product, HttpStatus.OK);

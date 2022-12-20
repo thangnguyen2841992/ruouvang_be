@@ -9,10 +9,10 @@ import java.util.List;
 
 @Repository
 public interface IProductRepository extends JpaRepository<Product, Long> {
-    @Query(value = "select * from products  order by name limit 10 offset ?1", nativeQuery = true)
-    List<Product> findAllProducts(int offset);
-    @Query(value = "select * from products where category_id = 3 order by name limit 10 offset ?1 ", nativeQuery = true)
-    List<Product> findAllProductByCategory3(int offset);
-    @Query(value = "select * from products where category_id in (1,2) order by name limit 10 offset ?1 ", nativeQuery = true)
-    List<Product> findAllProductByCategory1and2(int offset);
+    //Lấy danh sách rượu vang.
+    @Query(value = "select * from products where accessory_id = 0  order by name limit 10 offset ?1", nativeQuery = true)
+    List<Product> findAllAlcohol(int offset);
+    //Lấy danh sách phụ kiện rượu vang
+    @Query(value = "select * from products where accessory_id != 0  order by name limit 10 offset ?1", nativeQuery = true)
+    List<Product> findAllAccessory(int offset);
 }
