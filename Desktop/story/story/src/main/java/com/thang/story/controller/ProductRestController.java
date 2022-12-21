@@ -81,5 +81,15 @@ public class ProductRestController {
         this.productService.save(product);
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
+    @DeleteMapping("/delete/{productID}")
+    public ResponseEntity<?> deleteProduct(@PathVariable Long productID) {
+        Optional<Product> productOptional = this.productService.findById(productID);
+        if (!productOptional.isPresent()) {
+            return new ResponseEntity<>(new Message("Sản phẩm không tồn tại"), HttpStatus.BAD_REQUEST);
+        }
+        this.productService.delete(productID);
+        return new ResponseEntity<>(new Message("Xoá thành công!"), HttpStatus.OK);
+    }
+
 
 }

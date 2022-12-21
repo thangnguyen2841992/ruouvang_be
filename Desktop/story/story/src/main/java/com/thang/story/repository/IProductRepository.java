@@ -15,4 +15,7 @@ public interface IProductRepository extends JpaRepository<Product, Long> {
     //Lấy danh sách phụ kiện rượu vang
     @Query(value = "select * from products where accessory_id != 0  order by name limit 10 offset ?1", nativeQuery = true)
     List<Product> findAllAccessory(int offset);
+
+    //Xoá sản phẩm
+
 }
