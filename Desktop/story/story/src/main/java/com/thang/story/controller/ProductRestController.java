@@ -57,6 +57,26 @@ public class ProductRestController {
         return new ResponseEntity<>(productDTOList, HttpStatus.OK);
     }
 
+    @GetMapping("/origin/{originId}")
+    public ResponseEntity<?> getAllAlcoholOfChile(@PathVariable Long originId, @RequestParam(value = "offset") int offset) {
+        List<Product> products = this.productService.findProductsByOriginId(originId, offset);
+        List<ProductDTO> productDTOList = new ArrayList<>();
+        for (int i = 0; i < products.size(); i++) {
+            productDTOList.add(this.productService.mappingProductToProductDTO(products.get(i)));
+        }
+        return new ResponseEntity<>(productDTOList, HttpStatus.OK);
+    }
+
+    @GetMapping("/type/{typeId}")
+    public ResponseEntity<?> getAllAlcoholOfWhite(@PathVariable Long typeId, @RequestParam(value = "offset") int offset) {
+        List<Product> products = this.productService.findProductsByTypeId(typeId, offset);
+        List<ProductDTO> productDTOList = new ArrayList<>();
+        for (int i = 0; i < products.size(); i++) {
+            productDTOList.add(this.productService.mappingProductToProductDTO(products.get(i)));
+        }
+        return new ResponseEntity<>(productDTOList, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<?> createNewProduct(@RequestBody Product product) {
         this.productService.save(product);
@@ -81,6 +101,7 @@ public class ProductRestController {
         this.productService.save(product);
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
+
     @DeleteMapping("/delete/{productID}")
     public ResponseEntity<?> deleteProduct(@PathVariable Long productID) {
         Optional<Product> productOptional = this.productService.findById(productID);

@@ -86,4 +86,15 @@ public class ProductServiceImpl implements IProductService{
         return productDTO;
     }
 
+    @Override
+    public List<Product> findProductsByOriginId(Long originId, int offset) {
+        return this.productRepository.findProductsByOriginId(originId, offset);
+    }
+
+    @Override
+    public List<Product> findProductsByTypeId(Long originId, int offset) {
+        return this.productRepository.findProductsByTypeId(originId, offset);
+    }
+
+
 }
