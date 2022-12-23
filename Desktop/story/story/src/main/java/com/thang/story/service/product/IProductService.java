@@ -21,6 +21,9 @@ public interface IProductService extends IGeneralService<Product> {
     // Lay danh sach ruou vang trang
     List<Product> findProductsByTypeId(Long originId, int offset);
 
+    List<Product> findProductsByAccessoryId(Long accessoryId, int offset);
+
+
 
 
 

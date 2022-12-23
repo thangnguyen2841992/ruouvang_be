@@ -22,5 +22,8 @@ public interface IProductRepository extends JpaRepository<Product, Long> {
     // Lay danh sach ruou vang trang
     @Query(value = "select * from products where type_id = ?1 and accessory_id = 0 order by name limit 10 offset ?2", nativeQuery = true)
     List<Product> findProductsByTypeId(Long originId, int offset);
+    //Lay danh sach cu the tung phu kien
+    @Query(value = "select * from products where accessory_id = ?1 and type_id = 0 and origin_id = 0  order by name limit 10 offset ?2", nativeQuery = true)
+    List<Product> findProductsByAccessoryId(Long accessoryId, int offset);
 
 }

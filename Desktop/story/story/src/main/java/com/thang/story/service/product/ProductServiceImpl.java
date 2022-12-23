@@ -96,5 +96,10 @@ public class ProductServiceImpl implements IProductService{
         return this.productRepository.findProductsByTypeId(originId, offset);
     }
 
+    @Override
+    public List<Product> findProductsByAccessoryId(Long accessoryId, int offset) {
+        return this.productRepository.findProductsByAccessoryId(accessoryId, offset);
+    }
+
 
 }

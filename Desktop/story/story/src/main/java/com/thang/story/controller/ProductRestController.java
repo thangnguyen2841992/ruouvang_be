@@ -76,6 +76,15 @@ public class ProductRestController {
         }
         return new ResponseEntity<>(productDTOList, HttpStatus.OK);
     }
+    @GetMapping("/accessory/{accessoryId}")
+    public ResponseEntity<?> getAllAccessoryById(@PathVariable Long accessoryId, @RequestParam(value = "offset") int offset) {
+        List<Product> products = this.productService.findProductsByAccessoryId(accessoryId, offset);
+        List<ProductDTO> productDTOList = new ArrayList<>();
+        for (int i = 0; i < products.size(); i++) {
+            productDTOList.add(this.productService.mappingProductToProductDTO(products.get(i)));
+        }
+        return new ResponseEntity<>(productDTOList, HttpStatus.OK);
+    }
 
     @PostMapping
     public ResponseEntity<?> createNewProduct(@RequestBody Product product) {
