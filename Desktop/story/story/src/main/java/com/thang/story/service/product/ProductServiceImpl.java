@@ -1,6 +1,7 @@
 package com.thang.story.service.product;
 
 import com.thang.story.model.dto.ProductDTO;
+import com.thang.story.model.dto.TotalPage;
 import com.thang.story.model.entity.Accessory;
 import com.thang.story.model.entity.Origin;
 import com.thang.story.model.entity.Product;
@@ -99,6 +100,11 @@ public class ProductServiceImpl implements IProductService{
     @Override
     public List<Product> findProductsByAccessoryId(Long accessoryId, int offset) {
         return this.productRepository.findProductsByAccessoryId(accessoryId, offset);
+    }
+
+    @Override
+    public List<Product> findAllAlcoholNoPagination() {
+        return this.productRepository.findAllAlcoholNoPagination();
     }
 
 

@@ -5,6 +5,7 @@ import com.thang.story.model.dto.ProductDTO;
 import com.thang.story.model.entity.Accessory;
 import com.thang.story.model.entity.Origin;
 import com.thang.story.model.entity.Product;
+import com.thang.story.repository.IProductRepository;
 import com.thang.story.service.accessory.IAccessoryService;
 import com.thang.story.service.origin.IOriginService;
 import com.thang.story.service.product.IProductService;
@@ -24,9 +25,7 @@ public class ProductRestController {
     @Autowired
     private IProductService productService;
     @Autowired
-    private IOriginService categoryService;
-    @Autowired
-    private IAccessoryService brandService;
+    private IProductRepository productRepository;
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getProductById(@PathVariable Long id) {
@@ -56,10 +55,28 @@ public class ProductRestController {
         }
         return new ResponseEntity<>(productDTOList, HttpStatus.OK);
     }
+    @GetMapping("/all/alcohol")
+    public ResponseEntity<?> getAllAlcoholNoPagination() {
+        List<Product> products = this.productService.findAllAlcoholNoPagination();
+        List<ProductDTO> productDTOList = new ArrayList<>();
+        for (int i = 0; i < products.size(); i++) {
+            productDTOList.add(this.productService.mappingProductToProductDTO(products.get(i)));
+        }
+        return new ResponseEntity<>(productDTOList, HttpStatus.OK);
+    }
 
     @GetMapping("/origin/{originId}")
     public ResponseEntity<?> getAllAlcoholOfChile(@PathVariable Long originId, @RequestParam(value = "offset") int offset) {
         List<Product> products = this.productService.findProductsByOriginId(originId, offset);
+        List<ProductDTO> productDTOList = new ArrayList<>();
+        for (int i = 0; i < products.size(); i++) {
+            productDTOList.add(this.productService.mappingProductToProductDTO(products.get(i)));
+        }
+        return new ResponseEntity<>(productDTOList, HttpStatus.OK);
+    }
+    @GetMapping("/all/origin/{originId}")
+    public ResponseEntity<?> getAllAlcoholOfChileNoPagination(@PathVariable Long originId) {
+        List<Product> products = this.productRepository.findProductsByOriginIdNoPagination(originId);
         List<ProductDTO> productDTOList = new ArrayList<>();
         for (int i = 0; i < products.size(); i++) {
             productDTOList.add(this.productService.mappingProductToProductDTO(products.get(i)));
@@ -76,6 +93,15 @@ public class ProductRestController {
         }
         return new ResponseEntity<>(productDTOList, HttpStatus.OK);
     }
+    @GetMapping("/all/type/{typeId}")
+    public ResponseEntity<?> getAllAlcoholOfTypeNoPagination(@PathVariable Long typeId) {
+        List<Product> products = this.productRepository.findProductsByTypeIdNoPagination(typeId);
+        List<ProductDTO> productDTOList = new ArrayList<>();
+        for (int i = 0; i < products.size(); i++) {
+            productDTOList.add(this.productService.mappingProductToProductDTO(products.get(i)));
+        }
+        return new ResponseEntity<>(productDTOList, HttpStatus.OK);
+    }
     @GetMapping("/accessory/{accessoryId}")
     public ResponseEntity<?> getAllAccessoryById(@PathVariable Long accessoryId, @RequestParam(value = "offset") int offset) {
         List<Product> products = this.productService.findProductsByAccessoryId(accessoryId, offset);
@@ -85,7 +111,15 @@ public class ProductRestController {
         }
         return new ResponseEntity<>(productDTOList, HttpStatus.OK);
     }
-
+    @GetMapping("/all/accessory/{accessoryId}")
+    public ResponseEntity<?> getAllAccessoryByIdNoPagination(@PathVariable Long accessoryId) {
+        List<Product> products = this.productRepository.findProductsByAccessoryIdNoPagination(accessoryId);
+        List<ProductDTO> productDTOList = new ArrayList<>();
+        for (int i = 0; i < products.size(); i++) {
+            productDTOList.add(this.productService.mappingProductToProductDTO(products.get(i)));
+        }
+        return new ResponseEntity<>(productDTOList, HttpStatus.OK);
+    }
     @PostMapping
     public ResponseEntity<?> createNewProduct(@RequestBody Product product) {
         this.productService.save(product);

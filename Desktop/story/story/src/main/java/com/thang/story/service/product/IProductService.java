@@ -1,6 +1,7 @@
 package com.thang.story.service.product;
 
 import com.thang.story.model.dto.ProductDTO;
+import com.thang.story.model.dto.TotalPage;
 import com.thang.story.model.entity.Product;
 import com.thang.story.service.IGeneralService;
 import org.springframework.data.jpa.repository.Query;
@@ -22,6 +23,9 @@ public interface IProductService extends IGeneralService<Product> {
     List<Product> findProductsByTypeId(Long originId, int offset);
 
     List<Product> findProductsByAccessoryId(Long accessoryId, int offset);
+
+    List<Product> findAllAlcoholNoPagination();
+
 
 
 
