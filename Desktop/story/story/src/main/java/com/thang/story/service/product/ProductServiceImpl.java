@@ -13,8 +13,11 @@ import com.thang.story.service.type.ITypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
+
 
 @Service
 public class ProductServiceImpl implements IProductService{
@@ -64,7 +67,10 @@ public class ProductServiceImpl implements IProductService{
         productDTO.setName(product.getName());
         productDTO.setImage(product.getImage());
         productDTO.setDescription(product.getDescription());
-        productDTO.setPrice(product.getPrice());
+        Locale localeVN = new Locale("vi", "VN");
+        NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
+        String str1 = currencyVN.format(product.getPrice());
+        productDTO.setPrice(str1);
         productDTO.setQuantity(product.getQuantity());
         Optional<Origin> origin = this.originService.findById(product.getOriginId());
         if (origin.isPresent()) {

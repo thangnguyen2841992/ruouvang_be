@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface IProductRepository extends JpaRepository<Product, Long> {
     //Lấy danh sách rượu vang.
-    @Query(value = "select * from products where accessory_id = 0  order by name limit 10 offset ?1", nativeQuery = true)
+    @Query(value = "select * from products where accessory_id = 0  order by name limit 12 offset ?1", nativeQuery = true)
     List<Product> findAllAlcohol(int offset);
 
     //Lấy danh sách rượu vang khong phan trang.

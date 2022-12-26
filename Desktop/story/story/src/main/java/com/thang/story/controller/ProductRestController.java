@@ -45,6 +45,15 @@ public class ProductRestController {
         }
         return new ResponseEntity<>(productDTOList, HttpStatus.OK);
     }
+    @GetMapping("/all/accessory")
+    public ResponseEntity<?> getAllAccessoryNoPagination() {
+        List<Product> products = this.productRepository.findAllAccessoryNoPagination();
+        List<ProductDTO> productDTOList = new ArrayList<>();
+        for (int i = 0; i < products.size(); i++) {
+            productDTOList.add(this.productService.mappingProductToProductDTO(products.get(i)));
+        }
+        return new ResponseEntity<>(productDTOList, HttpStatus.OK);
+    }
 
     @GetMapping("/alcohol")
     public ResponseEntity<?> getAllAlcohol(@RequestParam(value = "offset") int offset) {
