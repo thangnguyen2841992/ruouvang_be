@@ -35,6 +35,15 @@ public class ProductRestController {
         }
         return new ResponseEntity<>(productOptional.get(), HttpStatus.OK);
     }
+    @GetMapping("dto/{id}")
+    public ResponseEntity<?> getProductByIdDTO(@PathVariable Long id) {
+        Optional<Product> productOptional = this.productService.findById(id);
+        if (!productOptional.isPresent()) {
+            return new ResponseEntity<>(new Message("Sản phẩm không tồn tại!"), HttpStatus.BAD_REQUEST);
+        }
+        ProductDTO productDTO = this.productService.mappingProductToProductDTO(productOptional.get());
+        return new ResponseEntity<>(productDTO, HttpStatus.OK);
+    }
 
     @GetMapping("/accessory")
     public ResponseEntity<?> getAllProductCategory3(@RequestParam(value = "offset") int offset) {
