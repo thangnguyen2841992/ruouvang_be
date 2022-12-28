@@ -1,5 +1,6 @@
 package com.thang.story.controller;
 
+import com.thang.story.model.dto.Invoice;
 import com.thang.story.model.entity.Cart;
 import com.thang.story.model.entity.Product;
 import com.thang.story.service.cart.ICartService;
@@ -20,6 +21,12 @@ public class CartRestController {
     private ICartService cartService;
     @Autowired
     private IProductService productService;
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<?> getInvoicesOfUser(@PathVariable Long userId) {
+        Invoice invoice = this.cartService.findCartsByUserIdOrderByDateCreated(userId);
+        return new ResponseEntity<>(invoice, HttpStatus.OK);
+    }
 
     @PostMapping
     public ResponseEntity<?> createNewCart(@RequestBody Cart cart) {

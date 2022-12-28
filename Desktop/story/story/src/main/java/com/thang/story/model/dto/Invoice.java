@@ -12,5 +12,7 @@ import java.util.List;
 public class Invoice {
     private List<CartDTO> cartsOfUser;
 
+    private int totalQuantity;
+
     private String totalPayment;
 }

@@ -64,15 +64,17 @@ public class CartServiceImpl implements ICartService {
     public Invoice findCartsByUserIdOrderByDateCreated(Long userId) {
         List<Cart> carts = this.cartRepository.findCartsByUserIdOrderByDateCreated(userId);
         List<CartDTO> cartDTOS = new ArrayList<>();
+        int totalQuantity = 0;
         double totalPayment = 0;
         for (int i = 0; i < carts.size(); i++) {
             cartDTOS.add(mappingCartToCartDTO(carts.get(i)));
             totalPayment = totalPayment + carts.get(i).getPayment();
+            totalQuantity = totalQuantity + carts.get(i).getQuantity();
         }
         Locale localeVN = new Locale("vi", "VN");
         NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
         String str = currencyVN.format(totalPayment);
-        Invoice newInvoice = new Invoice(cartDTOS, str);
+        Invoice newInvoice = new Invoice(cartDTOS,totalQuantity, str);
         return newInvoice;
     }
 
