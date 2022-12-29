@@ -51,6 +51,7 @@ public class CartServiceImpl implements ICartService {
         cartDTO.setUserId(cart.getUserId());
         cartDTO.setProductName(product.getName());
         cartDTO.setProductImg(product.getImage());
+        cartDTO.setContent(product.getContent());
         Locale localeVN = new Locale("vi", "VN");
         NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
         String str = currencyVN.format(cart.getPayment());

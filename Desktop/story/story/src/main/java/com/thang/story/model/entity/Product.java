@@ -23,6 +23,7 @@ public class Product {
     private String description;
 
     @Lob
+    @Column
     private String content;
 
     private int quantity;

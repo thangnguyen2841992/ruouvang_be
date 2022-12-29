@@ -21,5 +21,7 @@ public class CartDTO {
 
     private String productPrice;
 
+    private String content;
+
     private Long userId;
 }
