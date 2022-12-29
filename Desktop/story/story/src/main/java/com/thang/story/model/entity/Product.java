@@ -22,6 +22,9 @@ public class Product {
 
     private String description;
 
+    @Lob
+    private String content;
+
     private int quantity;
 
     private String image;

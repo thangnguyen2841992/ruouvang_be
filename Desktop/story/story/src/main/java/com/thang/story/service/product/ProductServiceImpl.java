@@ -67,6 +67,7 @@ public class ProductServiceImpl implements IProductService{
         productDTO.setName(product.getName());
         productDTO.setImage(product.getImage());
         productDTO.setDescription(product.getDescription());
+        productDTO.setContent(product.getContent());
         Locale localeVN = new Locale("vi", "VN");
         NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
         String str1 = currencyVN.format(product.getPrice());

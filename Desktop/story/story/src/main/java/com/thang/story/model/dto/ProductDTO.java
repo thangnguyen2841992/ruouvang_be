@@ -22,6 +22,8 @@ public class ProductDTO {
 
     private String description;
 
+    private String content;
+
     private int quantity;
 
     private String image;
