@@ -1,6 +1,7 @@
 package com.thang.story.controller;
 
 import com.thang.story.model.dto.Invoice;
+import com.thang.story.model.dto.Message;
 import com.thang.story.model.entity.Cart;
 import com.thang.story.model.entity.Product;
 import com.thang.story.service.cart.ICartService;
@@ -50,5 +51,15 @@ public class CartRestController {
         }
         this.cartService.save(newCart);
         return new ResponseEntity<>(newCart, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/cart/{cartId}")
+    public ResponseEntity<?> deleteCart(@PathVariable Long cartId) {
+        Optional<Cart> cartOptional = this.cartService.findById(cartId);
+        if (!cartOptional.isPresent()) {
+            return new ResponseEntity<>(new Message("Giỏ hàng không tồn tại!"), HttpStatus.BAD_REQUEST);
+        }
+        this.cartService.delete(cartId);
+        return new ResponseEntity<>(new Message("Xoá thành công!"), HttpStatus.OK);
     }
 }
