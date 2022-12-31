@@ -9,6 +9,9 @@ import java.util.List;
 
 @Repository
 public interface IProductRepository extends JpaRepository<Product, Long> {
+    //Lấy list danh sách rượu vang theo productID
+    @Query(value = "select * from products where id = ?1", nativeQuery = true)
+    List<Product> getProductById(Long id);
     //Lấy danh sách rượu vang.
     @Query(value = "select * from products where accessory_id = 0  order by name limit 12 offset ?1", nativeQuery = true)
     List<Product> findAllAlcohol(int offset);

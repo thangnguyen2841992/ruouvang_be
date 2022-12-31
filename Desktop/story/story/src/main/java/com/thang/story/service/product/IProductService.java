@@ -27,6 +27,10 @@ public interface IProductService extends IGeneralService<Product> {
     List<Product> findAllAlcoholNoPagination();
 
 
+    List<Product> getProductById(Long id);
+
+
+
 
 
 

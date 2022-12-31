@@ -114,5 +114,10 @@ public class ProductServiceImpl implements IProductService{
         return this.productRepository.findAllAlcoholNoPagination();
     }
 
+    @Override
+    public List<Product> getProductById(Long id) {
+        return this.productRepository.getProductById(id);
+    }
+
 
 }
