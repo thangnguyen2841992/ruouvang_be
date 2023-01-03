@@ -24,5 +24,9 @@ public class AccessoryRestController {
     public ResponseEntity<?> getAllAccessory() {
         return new ResponseEntity<>(this.accessoryService.findAll(), HttpStatus.OK);
     }
+    @GetMapping("/dto")
+    public ResponseEntity<?> getAllAccessoryDTO() {
+        return new ResponseEntity<>(this.accessoryService.getAllAccessory(), HttpStatus.OK);
+    }
 
 }
