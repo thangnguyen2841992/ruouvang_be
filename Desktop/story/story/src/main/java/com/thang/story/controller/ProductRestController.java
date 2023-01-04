@@ -44,6 +44,15 @@ public class ProductRestController {
         ProductDTO productDTO = this.productService.mappingProductToProductDTO(productOptional.get());
         return new ResponseEntity<>(productDTO, HttpStatus.OK);
     }
+    @GetMapping("dtoabc/{id}")
+    public ResponseEntity<?> getProductByIdDTOaaa(@PathVariable Long id) {
+        Optional<Product> productOptional = this.productService.findById(id);
+        if (!productOptional.isPresent()) {
+            return new ResponseEntity<>(new Message("Sản phẩm không tồn tại!"), HttpStatus.BAD_REQUEST);
+        }
+        ProductDTO productDTO = this.productService.mappingProductToProductDTO(productOptional.get());
+        return new ResponseEntity<>(productDTO, HttpStatus.OK);
+    }
     @GetMapping("dto1/{id}")
     public ResponseEntity<?> getProductByIdDTO1(@PathVariable Long id) {
         List<Product> productOptional = this.productService.getProductById(id);
