@@ -44,15 +44,6 @@ public class ProductRestController {
         ProductDTO productDTO = this.productService.mappingProductToProductDTO(productOptional.get());
         return new ResponseEntity<>(productDTO, HttpStatus.OK);
     }
-    @GetMapping("dtoabc/{id}")
-    public ResponseEntity<?> getProductByIdDTOaaa(@PathVariable Long id) {
-        Optional<Product> productOptional = this.productService.findById(id);
-        if (!productOptional.isPresent()) {
-            return new ResponseEntity<>(new Message("Sản phẩm không tồn tại!"), HttpStatus.BAD_REQUEST);
-        }
-        ProductDTO productDTO = this.productService.mappingProductToProductDTO(productOptional.get());
-        return new ResponseEntity<>(productDTO, HttpStatus.OK);
-    }
     @GetMapping("dto1/{id}")
     public ResponseEntity<?> getProductByIdDTO1(@PathVariable Long id) {
         List<Product> productOptional = this.productService.getProductById(id);
@@ -63,15 +54,6 @@ public class ProductRestController {
         return new ResponseEntity<>(productDTOList, HttpStatus.OK);
     }
 
-    @GetMapping("dtrtrtrtro1/{id}")
-    public ResponseEntity<?> getProductByIdDTO1(@PathVariable Long id) {
-        List<Product> productOptional = this.productService.getProductById(id);
-        List<ProductDTO> productDTOList = new ArrayList<>();
-        for (int i = 0; i < productOptional.size(); i++) {
-            productDTOList.add(this.productService.mappingProductToProductDTO(productOptional.get(i)));
-        }
-        return new ResponseEntity<>(productDTOList, HttpStatus.OK);
-    }
 
     @GetMapping("/accessory")
     public ResponseEntity<?> getAllProductCategory3(@RequestParam(value = "offset") int offset) {

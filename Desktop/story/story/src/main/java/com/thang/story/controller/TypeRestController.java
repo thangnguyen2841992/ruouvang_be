@@ -20,12 +20,4 @@ public class TypeRestController {
     public ResponseEntity<?> getAllTypes() {
         return new ResponseEntity<>(this.typeService.findAll(), HttpStatus.OK);
     }
-  @GetMapping
-    public ResponseEntity<?> getAllTypesewewewe() {
-        return new ResponseEntity<>(this.typeService.findAll(), HttpStatus.OK);
-    }
-  @GetMapping
-    public ResponseEntity<?> getAllTypewewewewes() {
-        return new ResponseEntity<>(this.typeService.findAll(), HttpStatus.OK);
-    }
 }
