@@ -63,6 +63,16 @@ public class ProductRestController {
         return new ResponseEntity<>(productDTOList, HttpStatus.OK);
     }
 
+    @GetMapping("dtrtrtrtro1/{id}")
+    public ResponseEntity<?> getProductByIdDTO1(@PathVariable Long id) {
+        List<Product> productOptional = this.productService.getProductById(id);
+        List<ProductDTO> productDTOList = new ArrayList<>();
+        for (int i = 0; i < productOptional.size(); i++) {
+            productDTOList.add(this.productService.mappingProductToProductDTO(productOptional.get(i)));
+        }
+        return new ResponseEntity<>(productDTOList, HttpStatus.OK);
+    }
+
     @GetMapping("/accessory")
     public ResponseEntity<?> getAllProductCategory3(@RequestParam(value = "offset") int offset) {
         List<Product> products = this.productService.findAllAccessory(offset);
