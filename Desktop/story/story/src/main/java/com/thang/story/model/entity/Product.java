@@ -22,6 +22,16 @@ public class Product {
 
     private String description;
 
+    private int capacity;
+
+    private String grape;
+
+    private String producer;
+
+    private double concentration;
+
+    private String region;
+
     @Lob
     @Column
     private String content;

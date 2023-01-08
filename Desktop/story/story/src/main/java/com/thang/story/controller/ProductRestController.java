@@ -166,6 +166,11 @@ public class ProductRestController {
         product.setQuantity(productForm.getQuantity());
         product.setDescription(productForm.getDescription());
         product.setContent(productForm.getContent());
+        product.setCapacity(productForm.getCapacity());
+        product.setGrape(productForm.getGrape());
+        product.setProducer(productForm.getProducer());
+        product.setConcentration(productForm.getConcentration());
+        product.setRegion(productForm.getRegion());
         product.setOriginId(productForm.getOriginId());
         product.setAccessoryId(productForm.getAccessoryId());
         product.setTypeId(productForm.getTypeId());

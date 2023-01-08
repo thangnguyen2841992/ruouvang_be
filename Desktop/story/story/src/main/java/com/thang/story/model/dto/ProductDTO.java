@@ -26,6 +26,17 @@ public class ProductDTO {
 
     private int quantity;
 
+    private int capacity;
+
+    private String grape;
+
+
+    private String producer;
+
+    private double concentration;
+
+    private String region;
+
     private String image;
 
     private String accessory;
