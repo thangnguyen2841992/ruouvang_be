@@ -35,6 +35,7 @@ public class ProductRestController {
         }
         return new ResponseEntity<>(productOptional.get(), HttpStatus.OK);
     }
+
     @GetMapping("dto/{id}")
     public ResponseEntity<?> getProductByIdDTO(@PathVariable Long id) {
         Optional<Product> productOptional = this.productService.findById(id);
@@ -44,6 +45,7 @@ public class ProductRestController {
         ProductDTO productDTO = this.productService.mappingProductToProductDTO(productOptional.get());
         return new ResponseEntity<>(productDTO, HttpStatus.OK);
     }
+
     @GetMapping("dto1/{id}")
     public ResponseEntity<?> getProductByIdDTO1(@PathVariable Long id) {
         List<Product> productOptional = this.productService.getProductById(id);
@@ -64,6 +66,7 @@ public class ProductRestController {
         }
         return new ResponseEntity<>(productDTOList, HttpStatus.OK);
     }
+
     @GetMapping("/all/accessory")
     public ResponseEntity<?> getAllAccessoryNoPagination() {
         List<Product> products = this.productRepository.findAllAccessoryNoPagination();
@@ -83,6 +86,7 @@ public class ProductRestController {
         }
         return new ResponseEntity<>(productDTOList, HttpStatus.OK);
     }
+
     @GetMapping("/all/alcohol")
     public ResponseEntity<?> getAllAlcoholNoPagination() {
         List<Product> products = this.productService.findAllAlcoholNoPagination();
@@ -102,6 +106,7 @@ public class ProductRestController {
         }
         return new ResponseEntity<>(productDTOList, HttpStatus.OK);
     }
+
     @GetMapping("/all/origin/{originId}")
     public ResponseEntity<?> getAllAlcoholOfChileNoPagination(@PathVariable Long originId) {
         List<Product> products = this.productRepository.findProductsByOriginIdNoPagination(originId);
@@ -121,6 +126,7 @@ public class ProductRestController {
         }
         return new ResponseEntity<>(productDTOList, HttpStatus.OK);
     }
+
     @GetMapping("/all/type/{typeId}")
     public ResponseEntity<?> getAllAlcoholOfTypeNoPagination(@PathVariable Long typeId) {
         List<Product> products = this.productRepository.findProductsByTypeIdNoPagination(typeId);
@@ -130,6 +136,7 @@ public class ProductRestController {
         }
         return new ResponseEntity<>(productDTOList, HttpStatus.OK);
     }
+
     @GetMapping("/accessory/{accessoryId}")
     public ResponseEntity<?> getAllAccessoryById(@PathVariable Long accessoryId, @RequestParam(value = "offset") int offset) {
         List<Product> products = this.productService.findProductsByAccessoryId(accessoryId, offset);
@@ -139,6 +146,7 @@ public class ProductRestController {
         }
         return new ResponseEntity<>(productDTOList, HttpStatus.OK);
     }
+
     @GetMapping("/all/accessory/{accessoryId}")
     public ResponseEntity<?> getAllAccessoryByIdNoPagination(@PathVariable Long accessoryId) {
         List<Product> products = this.productRepository.findProductsByAccessoryIdNoPagination(accessoryId);
@@ -148,6 +156,7 @@ public class ProductRestController {
         }
         return new ResponseEntity<>(productDTOList, HttpStatus.OK);
     }
+
     @PostMapping
     public ResponseEntity<?> createNewProduct(@RequestBody Product product) {
         this.productService.save(product);
@@ -162,7 +171,15 @@ public class ProductRestController {
         }
         Product product = productOptional.get();
         product.setName(productForm.getName());
-        product.setPrice(productForm.getPrice());
+        if (productOptional.get().getNewPrice() == 0) {
+            product.setPrice(productForm.getPrice());
+            product.setNewPrice(productForm.getNewPrice());
+        } else {
+            product.setPrice(productOptional.get().getNewPrice());
+            product.setNewPrice(productForm.getNewPrice());
+        }
+
+
         product.setQuantity(productForm.getQuantity());
         product.setDescription(productForm.getDescription());
         product.setContent(productForm.getContent());

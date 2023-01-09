@@ -20,6 +20,9 @@ public class ProductDTO {
 
     private String price;
 
+    private String newPrice;
+
+
     private String description;
 
     private String content;

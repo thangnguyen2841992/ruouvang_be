@@ -46,7 +46,7 @@ public class OriginServiceImpl implements IOriginService {
     @Override
     public OriginDTO mappingOriginToOriginDTO(Origin origin) {
         OriginDTO originDTO = new OriginDTO();
-        originDTO.setId(originDTO.getId());
+        originDTO.setId(origin.getId());
         originDTO.setName(origin.getName());
         List<Product> products = this.productRepository.findProductsByOriginIdNoPagination(origin.getId());
         originDTO.setTotalProduct(products.size());

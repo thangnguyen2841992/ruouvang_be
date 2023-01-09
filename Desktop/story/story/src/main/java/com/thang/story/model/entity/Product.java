@@ -20,6 +20,8 @@ public class Product {
 
     private double price;
 
+    private double newPrice;
+
     private String description;
 
     private int capacity;

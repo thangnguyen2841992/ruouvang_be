@@ -77,6 +77,10 @@ public class ProductServiceImpl implements IProductService{
         NumberFormat currencyVN = NumberFormat.getCurrencyInstance(localeVN);
         String str1 = currencyVN.format(product.getPrice());
         productDTO.setPrice(str1);
+        Locale localeVN1 = new Locale("vi", "VN");
+        NumberFormat currencyVN1 = NumberFormat.getCurrencyInstance(localeVN1);
+        String str2 = currencyVN1.format(product.getNewPrice());
+        productDTO.setNewPrice(str2);
         productDTO.setQuantity(product.getQuantity());
         Optional<Origin> origin = this.originService.findById(product.getOriginId());
         if (origin.isPresent()) {
